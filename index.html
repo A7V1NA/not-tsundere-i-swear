@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alvina's Heart</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #FFB6C1;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Bigger Cute Background Blobs */
+
+.blob {
+    position: absolute;
+    background: #FF8A9B;
+    opacity: 0.55;
+    animation: float 8s ease-in-out infinite;
+}
+
+.blob1 {
+    width: 420px;
+    height: 360px;
+    border-radius: 60% 40% 55% 45%;
+    top: -100px;
+    left: -100px;
+}
+
+.blob2 {
+    width: 350px;
+    height: 300px;
+    border-radius: 50% 60% 40% 50%;
+    bottom: -80px;
+    right: -80px;
+    animation-delay: 2s;
+}
+
+.blob3 {
+    width: 260px;
+    height: 220px;
+    border-radius: 45% 55% 60% 40%;
+    top: 10%;
+    right: 5%;
+    animation-delay: 4s;
+}
+
+.blob4 {
+    width: 300px;
+    height: 250px;
+    border-radius: 60% 40% 50% 50%;
+    bottom: 8%;
+    left: 8%;
+    animation-delay: 1s;
+}
+
+@keyframes float {
+    0%,100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.page {
+    width: 90%;
+    max-width: 700px;
+    position: absolute;
+    text-align: center;
+}
+
+.card {
+    background: rgba(255,255,255,0.35);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.title1 {
+    color: #FF2E4D;
+    margin-bottom: 25px;
+    line-height: 1.3;
+    font-family: "Times New Roman", serif;
+    font-style: italic;
+    font-size: 2.3rem;
+}
+
+.title2 {
+    color: #FF2E4D;
+    margin-bottom: 25px;
+    line-height: 1.3;
+    font-family: "Times New Roman", serif;
+    font-style: italic;
+    font-size: 2.3rem;
+
+}
+
+.buttons {
+    position: relative;
+    min-height: 120px;
+}
+
+button {
+    border: none;
+    padding: 12px 28px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s;
+    font-family: "Times New Roman", serif;
+}
+
+.yes {
+    background: white;
+    color: #ff6f91;
+    margin-right: 10px;
+}
+
+.no {
+    background: #ff8a9b;
+    color: white;
+}
+
+#message {
+    margin-top: 20px;
+    color: white;
+    font-weight: bold;
+    font-family: "Times New Roman", serif;
+}
+
+textarea {
+    width: 100%;
+    height: 320px;
+    border: none;
+    border-radius: 20px;
+    padding: 20px;
+    resize: none;
+    background: rgba(255,255,255,0.85);
+    font-size: 1rem;
+    line-height: 1.5;
+    font-family: "Times New Roman", serif;
+}
+
+.hidden {
+    display: none;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+<div class="blob blob3"></div>
+<div class="blob blob4"></div>
+
+<div class="page" id="page1">
+    <div class="card">
+
+
+    <h1 class="title1">Wanna dive into Alvina's heart?<br>I dare you to click no.</h1>
+
+    <div class="buttons">
+        <button class="yes" id="yesBtn" onclick="showHeart()">Yes</button>
+        <button class="no" id="noBtn">No</button>
+    </div>
+
+    <div id="message"></div>
+
+</div>
+
+
+</div>
+
+<div class="page hidden" id="page2">
+    <div class="card">
+
+
+    <h1 class="title2">Oops, it's filled with Ammara!</h1>
+
+    <textarea readonly>This is Alvina's heart. You've just exposed her secret, this is now a public declaration of her love for Ammara.
+
+
+And I know how charmed all of you must be because of this super cool website that I've made. If you want one, text me and pay me, I'll make you one. And don't you dare tell me it's easy.
+
+It. Is. Not. It's cool and tuff, suck it if you wanna.
+
+Bye.
+
+Yours,
+Alvina.</textarea>
+
+
+</div>
+
+
+</div>
+
+<script>
+function showHeart() {
+    document.getElementById("page1").classList.add("hidden");
+    document.getElementById("page2").classList.remove("hidden");
+}
+
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+
+let attempts = 0;
+
+const messages = [
+    "No",
+    "Are you sure?",
+    "Really?",
+    "Think Again",
+    "Girl...",
+    "Just Press Yes",
+    "😭",
+    "Fine. I ship it too."
+];
+
+function moveButton() {
+
+    attempts++;
+
+    noBtn.innerText =
+        messages[Math.min(attempts, messages.length - 1)];
+
+    document.getElementById("message").innerText =
+        "Please Try Again";
+
+    yesBtn.style.transform =
+        `scale(${1 + attempts * 0.15})`;
+
+    const maxX =
+        window.innerWidth - noBtn.offsetWidth - 20;
+
+    const maxY =
+        window.innerHeight - noBtn.offsetHeight - 20;
+
+    noBtn.style.position = "fixed";
+    noBtn.style.left =
+        Math.random() * maxX + "px";
+
+    noBtn.style.top =
+        Math.random() * maxY + "px";
+}
+
+noBtn.addEventListener("mouseover", moveButton);
+noBtn.addEventListener("click", moveButton);
+</script>
+
+</body>
+</html>
